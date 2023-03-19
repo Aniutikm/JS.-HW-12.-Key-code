@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      padding: 0 20px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .cards>div,
+    .cards>ul {
+      border: 1px solid red;
+      height: 300px;
+    }
+    
+    div, ul {
+      font-size: 30px;
+    }
+
+    ul {
+      list-style-type: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    li {
+      width: 30px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="header">JavaScript Key Code <span class="header__code"></span></div>
+      <div class="header__which"></div>
+      <div class="header__info">Key Code Information</div>
+    </header>
+    <main>
+      <div class="cards">
+        <div class="card-item">
+          <h4>event.key</h4>
+          <div class="key"></div>
+        </div>
+        <div class="card-item">
+          <h4>event.code</h4>
+          <div class="code"></div>
+        </div>
+        <div class="card-item">
+          <h4>event.which</h4>
+          <div class="which"></div>
+        </div>
+        <div class="card-item">
+          <h4>History</h4>
+          <ul class="historyBlock"></ul>
+        </div>
+      </div>
+    </main>
+  </div>
+
+
+  <script>
+
+    const key = document.querySelector(".key"),
+      code = document.querySelector(".code"),
+      which = document.querySelector(".which"),
+      historyBlock = document.querySelector(".historyBlock"),
+      headerCode = document.querySelector(".header__code"),
+      headerWhich = document.querySelector(".header__which");
+
+let array = [];
+
+window.addEventListener("keyup", (event) => {
+  if (!array.includes(event.key.toUpperCase())) { 
+    if (array.length >= 4) { 
+      array.pop();
+      historyBlock.removeChild(historyBlock.lastChild);
+    }
+    array.unshift(event.key.toUpperCase());
+    const li = document.createElement('li');
+    li.innerHTML = event.key.toUpperCase();
+    historyBlock.insertAdjacentElement("afterbegin", li);
+  }
+  
+  key.innerHTML = event.key;
+  code.innerHTML = event.code;
+  which.innerHTML = event.which;
+
+  headerCode.innerHTML = event.which;
+  headerWhich.innerHTML = event.which;
+});
+
+  </script>
+</body>
+</html>
